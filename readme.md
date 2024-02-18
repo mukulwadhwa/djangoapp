@@ -1,6 +1,6 @@
 ## Project Target
 
 -  Basic CRUD app
--  We will SQLite Intially
+-  We will SQLite initially.
 -  Migrate to MySQL
 -  ADD React
