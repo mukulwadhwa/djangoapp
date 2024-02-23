@@ -7,3 +7,4 @@ def home(request):
 
 def contact_us(request):
     return render(request, 'contact.html')
+    
