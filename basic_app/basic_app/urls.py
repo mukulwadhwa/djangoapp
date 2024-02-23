@@ -17,9 +17,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from myapp import views
+from django.views.generic.base import RedirectView
+
 
 urlpatterns = [ 
     path('', views.home),
     path('admin/', admin.site.urls),
     path('contact/', views.contact_us),
+    path('about/', views.about_us),
+    #Relative Path
+    path("red_rel", RedirectView.as_view( url = "www.google.com")),
+    path("relative", views.RelativePageView),
+
+    #External Path
+    path("red_ext", RedirectView.as_view( url = "http://google.com")),
+    path("external", views.ExternalPageView)
+
 ]
