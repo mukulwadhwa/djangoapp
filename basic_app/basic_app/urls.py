@@ -19,12 +19,14 @@ from django.urls import path
 from myapp import views
 from django.views.generic.base import RedirectView
 
-
 urlpatterns = [ 
-    path('', views.home),
+    path('', views.home, name="home"),
     path('admin/', admin.site.urls),
     path('contact/', views.contact_us),
     path('about/', views.about_us),
+    path('user-list/', views.user_list, name="user_list"),
+    path('create-account/', views.create_account, name='create_account'),
+
     #Relative Path
     path("red_rel", RedirectView.as_view( url = "www.google.com")),
     path("relative", views.RelativePageView),
