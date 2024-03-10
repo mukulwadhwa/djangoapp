@@ -1,0 +1,17 @@
+<!-- delete_bank_account.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Bank Account</title>
+</head>
+<body>
+    <h1>Delete Bank Account</h1>
+    <p>Are you sure you want to delete the bank account?</p>
+    <form method="post" action="{% url 'delete_bank_account' account.id %}">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+    </form>
+    <a href="{% url 'user_list' %}">Cancel</a>
+    <!-- <a href="{{ request.build_absolute_uri }}{% url 'user_list' %}">Cancel</a> -->
+</body>
+</html>

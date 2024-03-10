@@ -1,4 +1,5 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from .models import BankAccount
 from .forms import BankAccountForm
 
@@ -8,6 +9,32 @@ def user_list(request):
     users = BankAccount.objects.all()
     return render(request, 'user_list.html', {'users': users})
 
+def edit_bank_account(request, account_id):
+    account = get_object_or_404(BankAccount, pk=account_id)
+    
+    if request.method == 'POST':
+        form = BankAccountForm(request.POST, instance=account)
+        if form.is_valid():
+            form.save()
+            absolute_url = request.build_absolute_uri(reverse('user_list'))
+            return redirect(absolute_url)
+    else:
+        form = BankAccountForm(instance=account)
+
+    return render(request, 'edit_account.html', {'form': form, 'account': account})
+
+
+def delete_bank_account(request, account_id):
+    account = get_object_or_404(BankAccount, pk=account_id)
+    if request.method == 'POST':
+        account.delete()
+        #Reverse function for absolute path
+        absolute_url = request.build_absolute_uri(reverse('user_list'))
+        return redirect(absolute_url)
+        #return redirect('user-list/')
+    return render(request, 'delete_user.html', {'account': account})
+
+    #RedirectView.as_view( url = "http://google.com")
 
 def create_account(request):
     if request.method == 'POST':
