@@ -1,0 +1,16 @@
+<!-- edit_bank_account.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Bank Account</title>
+</head>
+<body>
+    <h1>Edit Bank Account</h1>
+    <form method="post" action="{% url 'edit_bank_account' account_id=account.pk %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+    <a href="{% url 'user_list' %}">Cancel</a>
+</body>
+</html>
