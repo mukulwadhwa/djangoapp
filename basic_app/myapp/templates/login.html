@@ -1,0 +1,45 @@
+<!-- create_bank_account.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Bank Account</title>
+</head>
+<body>
+
+    <!-- login.html -->
+    {% if messages %}
+    {% for message in messages %}
+        <div>{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+
+    <h1>Login Account</h1>
+
+    <form method="post">
+    {% csrf_token %}
+
+    <div class="col-md-4">
+        <label for="" class="form-label">Email</label>
+        <input type="text" name="email" id="">
+        <div class="mb-3">
+            <label for="" class="form-label">Password</label>
+            <input
+                type="password"
+                class="form-control"
+                name="password"
+                id=""
+                placeholder=""
+            />
+        </div>
+        
+    </div>
+    
+    
+     
+    <button type="submit">Submit</button>
+
+    </form>
+</body>
+</html>

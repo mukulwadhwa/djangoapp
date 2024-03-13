@@ -3,6 +3,11 @@ from django.urls import reverse
 from .models import BankAccount
 from .forms import BankAccountForm
 
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth.hashers import make_password
+
+
 # Create your views here.
 
 def user_list(request):
@@ -15,7 +20,19 @@ def edit_bank_account(request, account_id):
     if request.method == 'POST':
         form = BankAccountForm(request.POST, instance=account)
         if form.is_valid():
-            form.save()
+            form_data = form.cleaned_data
+
+            hashed_password = make_password(form_data['password'])
+            print(hashed_password)
+            form_data['password'] = hashed_password
+            
+            # Now save the modified data to the database
+            your_model_instance = form.save(commit=False)
+            your_model_instance.password = form_data['password']
+            your_model_instance.save()
+
+            # form.save()
+
             absolute_url = request.build_absolute_uri(reverse('user_list'))
             return redirect(absolute_url)
     else:
@@ -45,6 +62,20 @@ def create_account(request):
     else:
         form = BankAccountForm()
     return render(request, 'create_account.html', {'form': form})
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('email')
+        print(username)
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        print(user) 
+        if user is not None:
+            login(request, user)
+            return redirect('user_list.html')
+        else:
+            messages.error(request, 'Invalid username or password.')
+    return render(request, 'login.html')
 
 def home(request):
     return render(request, 'home.html')

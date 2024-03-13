@@ -28,6 +28,7 @@ urlpatterns = [
     path('create-account/', views.create_account, name='create_account'),
     path('delete-account/<int:account_id>/', views.delete_bank_account, name = 'delete_bank_account'),
     path('edit-account/<int:account_id>/', views.edit_bank_account, name = 'edit_bank_account'),
+    path('login/', views.login, name = 'login'),
 
     #Relative Path
     path("red_rel", RedirectView.as_view( url = "www.google.com")),
