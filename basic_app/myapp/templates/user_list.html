@@ -17,6 +17,8 @@
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Balance</th>
+                <!-- Add other columns as needed -->
+                <th>Action</th> <!-- New column for the Edit button -->
             </tr>
         </thead>
         <tbody>
@@ -28,6 +30,8 @@
                     <td>{{ user.last_name }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.balance }}</td>
+                    <td><a href="{% url 'edit_bank_account' user.id %}">Edit</a></td> <!-- It take name field of urls.py -->
+                    <td><a href="{% url 'delete_bank_account' user.id %}">Delete</a></td> 
                 </tr>
             {% endfor %}
         </tbody>

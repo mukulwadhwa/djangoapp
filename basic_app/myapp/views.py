@@ -31,7 +31,7 @@ def delete_bank_account(request, account_id):
         #Reverse function for absolute path
         absolute_url = request.build_absolute_uri(reverse('user_list'))
         return redirect(absolute_url)
-        #return redirect('user-list/')
+        
     return render(request, 'delete_user.html', {'account': account})
 
     #RedirectView.as_view( url = "http://google.com")
